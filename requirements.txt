@@ -1,0 +1,15 @@
+numpy
+opencv-python
+mediapipe
+python-dotenv
+requests
+
+# Optional (enable when you start training / exporting)
+ultralytics
+onnx
+onnxruntime
+tensorflow
+
+# Optional alerts (enable when you wire Twilio)
+twilio
+

@@ -1,0 +1,24 @@
+{
+  "camera_index": 0,
+  "yolo": {
+    "model_path": "models/yolo_int8.tflite",
+    "input_size": 640,
+    "person_conf": 0.7
+  },
+  "pose": {
+    "min_detection_confidence": 0.5,
+    "min_tracking_confidence": 0.5
+  },
+  "decision": {
+    "min_confirm_frames": 3,
+    "center_of_mass_y_thresh": 0.4,
+    "torso_vertical_angle_deg_thresh": 30.0
+  },
+  "alerts": {
+    "enabled": false,
+    "provider": "twilio",
+    "twilio_from": "",
+    "twilio_to": ""
+  }
+}
+
