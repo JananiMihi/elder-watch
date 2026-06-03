@@ -27,6 +27,7 @@ class TemporalDecision:
         self._fall_votes = 0
         self._near_votes = 0
         self._immobile_frames = 0
+        self._last_fall_frame = -1000  # Track last fall alert to avoid spam
 
     def update(
         self,

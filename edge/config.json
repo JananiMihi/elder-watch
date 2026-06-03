@@ -20,7 +20,7 @@
   "alerts": {
     "enabled": true,
     "provider": "twilio",
-    "twilio_from": "+94769848925",
+    "twilio_from": "+17753689976",
     "twilio_to": "+94769848925"
   }
 }
