@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import asdict
+from pathlib import Path
 
 import cv2
 
@@ -15,7 +16,12 @@ from .utils import load_config
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Elder Watch edge runtime")
-    p.add_argument("--config", default=None, help="Path to JSON config (optional)")
+    default_config = Path(__file__).with_name("config.json")
+    p.add_argument(
+        "--config",
+        default=str(default_config) if default_config.exists() else None,
+        help="Path to JSON config (optional)",
+    )
     p.add_argument("--demo", action="store_true", help="Run with stubs; no model files needed")
     p.add_argument("--camera", type=int, default=None, help="Override camera index")
     p.add_argument("--no-window", action="store_true", help="Disable OpenCV preview window")

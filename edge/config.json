@@ -19,8 +19,8 @@
   },
   "alerts": {
     "enabled": true,
-    "provider": "twilio",
-    "twilio_from": "+17753689976",
+    "provider": "twilio_whatsapp",
+    "twilio_from": "+14155238886",
     "twilio_to": "+94769848925"
   }
 }
