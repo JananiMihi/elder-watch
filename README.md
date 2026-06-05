@@ -18,14 +18,23 @@ This project implements the **Elder Watch** system described in `Mini_Project_Pr
 
 ```bash
 python -m venv .venv
-.\.venv\Scripts\pip install -r requirements.txt
+\.\.venv\Scripts\python -m pip install -r requirements.txt
 ```
+
+> Note (Windows PowerShell): to activate the venv, use `\.\.venv\Scripts\Activate.ps1`.
+> The `activate` script without `.ps1` is for CMD and won't switch `python` in PowerShell.
 
 2. Run edge app in **demo mode** (no model files needed yet):
 
 ```bash
-python edge\main.py --demo
+python -m edge.main --demo
 ```
+
+3. Train + export a real YOLO model (desktop):
+
+- See [training/README.md](training/README.md)
+
+Then run without `--demo` to enable YOLO inference.
 
 ### Next steps (implementation order)
 1. Get the edge pipeline running end-to-end (even with stubs).

@@ -1,16 +1,35 @@
 from __future__ import annotations
 
 import argparse
+import os
+import sys
 from dataclasses import asdict
 
 import cv2
 
-from .alerting import AlertConfig, send_alert
-from .decision import DecisionConfig, TemporalDecision
-from .detector import YoloConfig, YoloTFLiteDetector
-from .features import MotionState, extract_features
-from .pose import MediaPipePoseEstimator, PoseConfig
-from .utils import load_config
+
+if __name__ == "__main__" and (not __package__):
+    # Allow running as a script from the repo root: `python edge\\main.py`
+    # In that case Python puts the `edge/` directory on sys.path, but not the repo root.
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+    if repo_root not in sys.path:
+        sys.path.insert(0, repo_root)
+    __package__ = "edge"
+
+try:
+    from .alerting import AlertConfig, send_alert
+    from .decision import DecisionConfig, TemporalDecision
+    from .detector import StubDetector, YoloConfig, YoloTFLiteDetector
+    from .features import MotionState, extract_features
+    from .pose import MediaPipePoseEstimator, PoseConfig
+    from .utils import load_config
+except ImportError:  # When run as a script: `python edge\\main.py`
+    from edge.alerting import AlertConfig, send_alert
+    from edge.decision import DecisionConfig, TemporalDecision
+    from edge.detector import YoloConfig, YoloTFLiteDetector
+    from edge.features import MotionState, extract_features
+    from edge.pose import MediaPipePoseEstimator, PoseConfig
+    from edge.utils import load_config
 
 
 def parse_args() -> argparse.Namespace:
@@ -34,7 +53,7 @@ def main() -> int:
     dec_cfg = DecisionConfig(**(cfg.get("decision", {}) if isinstance(cfg.get("decision", {}), dict) else {}))
     alerts_cfg = AlertConfig(**(cfg.get("alerts", {}) if isinstance(cfg.get("alerts", {}), dict) else {}))
 
-    detector = YoloTFLiteDetector(yolo_cfg)
+    detector = StubDetector() if args.demo else YoloTFLiteDetector(yolo_cfg)
     pose = MediaPipePoseEstimator(pose_cfg)
     decision = TemporalDecision(dec_cfg)
     motion = MotionState()

@@ -11,7 +11,9 @@ This folder contains the on-device pipeline:
 
 ### Run demo mode (no models required)
 
+> Windows PowerShell tip: activate with `\.\.venv\Scripts\Activate.ps1` (not `activate`).
+
 ```bash
-python edge\main.py --demo
+python -m edge.main --demo
 ```
 
